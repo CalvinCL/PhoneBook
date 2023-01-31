@@ -9,11 +9,12 @@ morgan.token('body', function (req, res) {
   return JSON.stringify(req.body)
 })
 
-app.use(express.static('build'))
-app.use(cors())
-app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :body`))
 
+app.use(cors())
 app.use(express.json())
+app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :body`))
+app.use(express.static('build'));
+
 
 let persons = [
   {
@@ -108,7 +109,6 @@ app.delete('/api/persons/:id', (req, res) => {
 
 
 
-const PORT = process.env.PORT || 3002
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+app.listen(3002, () => {
+  console.log('Listening on PORT 3002!')
 })
